@@ -1,0 +1,94 @@
+#%RAML 1.0
+
+title: TestAPI
+baseUri: localhost/reggy/v1
+mediaType:
+  - application/json
+version: "1.0"
+protocols:
+  - HTTPS
+
+securitySchemes:
+  SecurityScheme:
+    type: Basic Authentication
+    description: Basic authentication
+    describedBy:
+      headers:
+        Boomkin:
+          enum:
+            - Reggiah
+          type: string
+
+types:
+  TestIn:
+    description: testIn
+    example:
+      strict: true
+      value:
+        testIn: testIn
+    type: object
+
+/v1/testcall:
+  post:
+    displayName: testCall
+    description: It's a testcall
+    body:
+      application/json:
+        type: TestIn
+        description: Test call result
+        example:
+          strict: true
+          value:
+            testIn: testIn
+    responses:
+      "200":
+        description: Test call result
+        body:
+          description: This is the result
+          example:
+            strict: true
+            value:
+              testOut: testOut
+          type: object
+    securedBy:
+      - SecurityScheme
+
+/v1/test:
+  post:
+    displayName: testCall
+    description: It's a testcall
+    body:
+      application/json:
+        type: object
+        description: Test call result
+        example:
+          strict: true
+          value:
+            testIn: testIn
+    responses:
+      "200":
+        description: Test call result
+        body:
+          description: This is the result
+          example:
+            strict: true
+            value:
+              testOut: testOut
+          type: object
+    securedBy:
+      - SecurityScheme
+  get:
+    displayName: testCall
+    description: It's a testcall
+    responses:
+      "200":
+        description: Test call result
+        body:
+          description: This is the result
+          example:
+            strict: true
+            value:
+              testOut: testOut
+          type: object
+    securedBy:
+      - SecurityScheme
